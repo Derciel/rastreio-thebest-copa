@@ -1,0 +1,42 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model NotaFiscal {
+  id             String    @id @default(uuid())
+  prioridade     Int?
+  dtEnvio        DateTime? // Data de envio formatada
+  statusEnvio    String?   // Status do envio
+  nf             String    // Número da Nota Fiscal (pesquisável)
+  diasUteis      Int?
+  dtEntrega      DateTime? // Data de entrega estimada/efetuada
+  transportadora String    // Nome da transportadora
+  idLoja         String?   // ID da loja/franquia
+  cidade         String?
+  estado         String?
+  cnpj           String    // CNPJ do franqueado
+  pais           String?
+  grupo          String?
+  
+  // Itens da Campanha de Inverno (Potes e Waffles)
+  pote240        String?
+  pote500        String?
+  baseWaffle     String?
+  tampa          String?
+  
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([cnpj])
+}
+
+model Configuracao {
+  id             String    @id @default("config_global")
+  ultimaSinc     DateTime
+  totalRegistros Int
+}

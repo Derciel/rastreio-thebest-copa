@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050508;
+  --foreground: #f4f4f6;
+  --card-bg: rgba(18, 18, 24, 0.7);
+  --card-border: rgba(139, 92, 246, 0.15);
+  
+  --brand-purple: #5c1b9b;
+  --brand-purple-glow: rgba(139, 92, 246, 0.4);
+  --brand-gold: #fbbf24;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-purple-light: #a78bfa;
+  --color-brand-gold-light: #fde68a;
+  --color-dark-surface: #0f0f15;
+  --color-dark-card: #151522;
+  --color-dark-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(92, 27, 155, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(251, 191, 36, 0.04) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+/* Efeito Glassmorphism Premium */
+.glass-panel {
+  background: rgba(15, 15, 25, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card {
+  background: rgba(20, 20, 32, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Brilhos neon sutis */
+.neon-glow-purple {
+  box-shadow: 0 0 25px -5px rgba(92, 27, 155, 0.35);
+}
+
+.neon-glow-gold {
+  box-shadow: 0 0 25px -5px rgba(251, 191, 36, 0.25);
+}
+
+/* Transição de cores e gradientes animados */
+.text-gradient-purple-gold {
+  background: linear-gradient(135deg, #c084fc 0%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient-purple-gold {
+  background: linear-gradient(135deg, #5c1b9b 0%, #d97706 100%);
+}
+
+/* Animações e transições */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050508;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27273a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b3b5c;
+}
