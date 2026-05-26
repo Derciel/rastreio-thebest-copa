@@ -344,11 +344,8 @@ export default function RastreioPublico() {
                     {/* Linha 1: Dados Principais da Nota */}
                     <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 pb-4 border-b border-zinc-900/60">
                       <div>
-                        <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-brand-purple/20 text-brand-purple-light border border-brand-purple/40">
-                          {nota.pais === 'Paraguai' ? 'Franquia Internacional' : 'Franquia Brasil'}
-                        </span>
-                        <h3 className="text-base md:text-lg font-bold text-zinc-100 mt-2">
-                          {nota.idLoja ? `[Loja ${nota.idLoja}] ` : ""}{nota.cidade ? `${nota.cidade.toUpperCase()} - ${nota.estado}` : "LOJA THE BEST AÇAÍ"}
+                        <h3 className="text-base md:text-lg font-bold text-zinc-100">
+                          {nota.cidade ? `${nota.cidade.toUpperCase()} - ${nota.estado}` : "LOJA THE BEST AÇAÍ"}
                         </h3>
                         <p className="text-xs text-zinc-500 font-mono mt-1">CNPJ: {nota.cnpj}</p>
                       </div>
@@ -377,29 +374,7 @@ export default function RastreioPublico() {
                       </div>
                     </div>
 
-                    {/* Linha 2: Itens Enviados (Campanha de Inverno) */}
-                    <div className="bg-zinc-950/40 border border-zinc-900/60 p-4 rounded-xl">
-                      <span className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider block mb-3">Itens da Campanha de Inverno</span>
-                      
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <div className="bg-zinc-950/80 border border-zinc-900 px-3 py-2 rounded-lg text-center">
-                          <span className="text-[10px] text-zinc-500 block">Pote 240ml</span>
-                          <strong className="text-sm text-brand-purple-light font-extrabold">{nota.pote240 || "0"}</strong>
-                        </div>
-                        <div className="bg-zinc-950/80 border border-zinc-900 px-3 py-2 rounded-lg text-center">
-                          <span className="text-[10px] text-zinc-500 block">Pote 500ml</span>
-                          <strong className="text-sm text-brand-purple-light font-extrabold">{nota.pote500 || "0"}</strong>
-                        </div>
-                        <div className="bg-zinc-950/80 border border-zinc-900 px-3 py-2 rounded-lg text-center">
-                          <span className="text-[10px] text-zinc-500 block">Base Waffle (Petit-g)</span>
-                          <strong className="text-sm text-brand-gold font-extrabold">{nota.baseWaffle || "0"}</strong>
-                        </div>
-                        <div className="bg-zinc-950/80 border border-zinc-900 px-3 py-2 rounded-lg text-center">
-                          <span className="text-[10px] text-zinc-500 block">Tampa do Pote</span>
-                          <strong className="text-sm text-zinc-400 font-extrabold">{nota.tampa || "0"}</strong>
-                        </div>
-                      </div>
-                    </div>
+
 
                     {/* Linha 3: Dados de Entrega e Transportadora */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-2">

@@ -44,17 +44,33 @@ export function convertSharePointUrl(url: string): string {
 function parseExcelDate(excelDate: any): Date | null {
   if (excelDate === undefined || excelDate === null || excelDate === '') return null;
   
+  // Se for um número serial do Excel
   const num = Number(excelDate);
   if (!isNaN(num)) {
-    // Excel armazena datas como dias desde 30/12/1899
-    // Bug bissexto de 1900 é tratado automaticamente no offset de dias
     const date = new Date((num - 25569) * 86400 * 1000);
-    // Ajusta o fuso horário para UTC/GMT para evitar desvios de dia
     const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
     return isNaN(utcDate.getTime()) ? null : utcDate;
   }
   
-  // Se for uma string, tenta fazer parse padrão
+  // Se for uma string
+  const str = String(excelDate).trim();
+  
+  // Trata formato brasileiro DD/MM/YYYY ou DD/MM/YYYY HH:MM:SS
+  const brDateRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?$/;
+  const match = str.match(brDateRegex);
+  if (match) {
+    const day = parseInt(match[1], 10);
+    const month = parseInt(match[2], 10) - 1; // Meses em JS são 0-indexed (0 = Janeiro)
+    const year = parseInt(match[3], 10);
+    const hour = match[4] ? parseInt(match[4], 10) : 0;
+    const minute = match[5] ? parseInt(match[5], 10) : 0;
+    const second = match[6] ? parseInt(match[6], 10) : 0;
+    
+    const date = new Date(year, month, day, hour, minute, second);
+    return isNaN(date.getTime()) ? null : date;
+  }
+  
+  // Fallback para outros formatos como ISO
   const parsedDate = new Date(excelDate);
   return isNaN(parsedDate.getTime()) ? null : parsedDate;
 }
