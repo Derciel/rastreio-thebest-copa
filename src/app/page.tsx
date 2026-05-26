@@ -241,7 +241,7 @@ export default function RastreioPublico() {
           <span className="text-gradient-purple-gold">CAMPANHA DE INVERNO</span>
         </h1>
         <p className="text-sm md:text-base text-zinc-400 max-w-xl">
-          Consulte suas Notas Fiscais de <strong className="font-bold text-zinc-200">Potes da Copa</strong> e <strong className="font-bold text-zinc-200">Embalagens Petit-gateau (Waffle)</strong> da <strong className="font-bold text-zinc-200">The Best Açaí</strong> e rastreie suas entregas instantaneamente.
+          Consulte suas Notas Fiscais de <strong className="font-bold text-zinc-200">Potes da Copa</strong> e <strong className="font-bold text-zinc-200">Embalagens Petit-gateau (Waffle)</strong> da <strong className="font-bold text-zinc-200">The Best Açaí</strong> e rastreie suas entregas.
         </p>
       </div>
 
@@ -315,7 +315,7 @@ export default function RastreioPublico() {
         {loading ? (
           <div className="w-full text-center py-12 flex flex-col items-center gap-3">
             <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-brand-purple-light"></div>
-            <p className="text-zinc-400 text-sm animate-pulse">Acessando banco na nuvem Neon...</p>
+            <p className="text-zinc-400 text-sm animate-pulse">Buscando dados. Aguarde...</p>
           </div>
         ) : searched ? (
           notas.length === 0 ? (
@@ -485,7 +485,6 @@ export default function RastreioPublico() {
       {/* FOOTER */}
       <footer className="w-full text-center text-[10px] md:text-xs text-zinc-600 mt-12 pt-6 border-t border-zinc-900/60">
         <p>© 2026 The Best Açaí. Todos os direitos reservados. Nicopel Embalagens.</p>
-        <p className="mt-1">Desenvolvido com tecnologia corporativa Next.js & Neon PostgreSQL de alta escala.</p>
       </footer>
     </main>
   );
