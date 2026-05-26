@@ -104,18 +104,51 @@ export default function RastreioPublico() {
     }
   };
 
+  // Copiador universal compatível com conexões HTTP locais/VPNs sem SSL (Contexto Inseguro)
+  const copyToClipboard = (text: string): Promise<void> => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    } else {
+      // Fallback robusto para HTTP sem HTTPS
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.top = '0';
+      textarea.style.left = '0';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        if (successful) return Promise.resolve();
+        return Promise.reject(new Error('execCommand falhou'));
+      } catch (err) {
+        document.body.removeChild(textarea);
+        return Promise.reject(err);
+      }
+    }
+  };
+
   // Copia o CNPJ da Nicopel (Remetente) em 1 clique
   const handleCopyNicopelCNPJ = () => {
-    navigator.clipboard.writeText(CNPJ_NICOPEL_CLEAN);
-    setCopiedCNPJ(true);
-    setTimeout(() => setCopiedCNPJ(false), 2000);
+    copyToClipboard(CNPJ_NICOPEL_CLEAN)
+      .then(() => {
+        setCopiedCNPJ(true);
+        setTimeout(() => setCopiedCNPJ(false), 2000);
+      })
+      .catch((err) => console.error("Falha ao copiar CNPJ:", err));
   };
 
   // Copia o número da Nota Fiscal em 1 clique
   const handleCopyNF = (nf: string) => {
-    navigator.clipboard.writeText(nf);
-    setCopiedNF(nf);
-    setTimeout(() => setCopiedNF(null), 2000);
+    copyToClipboard(nf)
+      .then(() => {
+        setCopiedNF(nf);
+        setTimeout(() => setCopiedNF(null), 2000);
+      })
+      .catch((err) => console.error("Falha ao copiar NF:", err));
   };
 
   // Formatação amigável de datas
@@ -420,8 +453,20 @@ export default function RastreioPublico() {
                       </div>
                     </div>
 
-                    {/* Dica amigável do SSW se aplicável */}
-                    {tData.isSSW && (
+                    {/* Dica amigável e Passo a Passo para outras transportadoras não-SSW */}
+                    {!tData.isSSW ? (
+                      <div className="bg-zinc-950/60 text-zinc-400 text-xs rounded-xl p-4 border border-zinc-900 leading-relaxed mt-2 flex flex-col gap-2">
+                        <span className="text-[10px] text-brand-gold font-bold uppercase tracking-wider block">⚠️ Rastreamento Manual - Passo a Passo</span>
+                        <p>Como esta transportadora não permite link direto, siga os passos rápidos para rastrear:</p>
+                        <ol className="list-decimal pl-4 space-y-1.5 text-zinc-500">
+                          <li>Clique no botão <strong className="text-zinc-300">"Copiar CNPJ"</strong> acima para salvar o CNPJ do Remetente (Nicopel).</li>
+                          <li>Clique no ícone de prancheta ao lado do número da nota para <strong className="text-zinc-300">copiar a Nota Fiscal (NF {nota.nf})</strong>.</li>
+                          <li>Clique em <strong className="text-zinc-300">"Rastrear Pedido"</strong> para abrir o portal da <strong>{tData.brandName}</strong>.</li>
+                          <li>No site da transportadora, cole os dados de <strong>Remetente (CNPJ da Nicopel)</strong> e o <strong>Número da Nota Fiscal</strong> para consultar a entrega de forma ágil!</li>
+                        </ol>
+                      </div>
+                    ) : (
+                      /* Dica amigável do SSW se aplicável */
                       <div className="bg-zinc-950/60 text-zinc-500 text-[10px] rounded-lg p-2 border border-zinc-900 text-center leading-relaxed">
                         🔍 Esta transportadora rastreia via <strong className="font-bold text-zinc-300">SSW</strong>. Ao abrir, o rastreamento é feito de forma <strong className="font-bold text-zinc-300">automática</strong> usando o CNPJ da Nicopel e a Nota Fiscal. Se necessário, use as opções "Destinatário" ou "Remetente".
                       </div>
