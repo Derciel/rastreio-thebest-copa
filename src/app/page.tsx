@@ -166,33 +166,76 @@ export default function RastreioPublico() {
     }
   };
 
-  // Mapeamento visual das transportadoras (Paleta de Cores e Link Rápido de Rastreio)
+  // Mapeamento visual das transportadoras (Paleta de Cores, Logos e Links de Rastreio)
   const getTransportadoraData = (name: string, nf: string) => {
     const cleanName = name.trim().toUpperCase();
     
-    // 5 Transportadoras sob o motor unificado do SSW
-    const sswTransportadoras = ['PLAV TRANSPORTADORA', 'TEX', 'ENVIA RAPIDO', 'BIAGHI & LUCHINI', 'COOPEX'];
-    
-    if (sswTransportadoras.some(t => cleanName.includes(t)) || cleanName === 'PLAV' || cleanName === 'BIAGHI' || cleanName === 'LUCHINI') {
+    // 1. PLAV
+    if (cleanName.includes('PLAV')) {
       return {
-        brandName: cleanName.includes('PLAV') ? 'Plav Transportes' :
-                   cleanName.includes('BIAGHI') ? 'Biaghi & Luchini' :
-                   cleanName.includes('COOPEX') ? 'Coopex' :
-                   cleanName.includes('ENVIA') ? 'Envia Rápido' : 'TEX',
-        colorClass: cleanName.includes('PLAV') ? 'bg-red-950/40 text-red-400 border-red-900/50' :
-                    cleanName.includes('ENVIA') ? 'bg-green-950/40 text-green-400 border-green-900/50' :
-                    'bg-amber-950/40 text-amber-400 border-amber-900/50',
-        colorGlow: cleanName.includes('PLAV') ? 'shadow-red-900/10' : 'shadow-amber-900/10',
-        // Link inteligente estruturado do e-commerce da SSW (passa CNPJ Nicopel + Nota Fiscal)
+        brandName: 'Plav Transportes',
+        colorClass: 'bg-red-950/40 text-red-400 border-red-900/50',
+        colorGlow: 'shadow-red-900/10',
         link: `https://ssw.inf.br/cgi-local/tracking/${CNPJ_NICOPEL_CLEAN}/${nf}`,
         isSSW: true,
-        logoBg: cleanName.includes('PLAV') ? 'from-red-600 to-black' : 
-                cleanName.includes('ENVIA') ? 'from-green-600 to-emerald-900' : 'from-purple-600 to-indigo-900',
-        logoLetter: cleanName.substring(0, 2)
+        logoUrl: 'https://i.ibb.co/d0Szt4mg/logo-plav.png',
+        logoBg: 'bg-black/30'
       };
     }
     
-    // Rodonaves
+    // 2. TEX
+    if (cleanName.includes('TEX')) {
+      return {
+        brandName: 'TEX Transportes',
+        colorClass: 'bg-zinc-950/40 text-zinc-300 border-zinc-800/50',
+        colorGlow: 'shadow-zinc-800/5',
+        link: `https://ssw.inf.br/cgi-local/tracking/${CNPJ_NICOPEL_CLEAN}/${nf}`,
+        isSSW: true,
+        logoUrl: 'https://i.ibb.co/cLsYLPh/logo-white-tex.png',
+        logoBg: 'bg-red-600/10 border border-red-800/30'
+      };
+    }
+    
+    // 3. ENVIA RAPIDO
+    if (cleanName.includes('ENVIA') || cleanName.includes('RÁPIDO') || cleanName.includes('RAPIDO')) {
+      return {
+        brandName: 'Envia Rápido',
+        colorClass: 'bg-green-950/40 text-green-400 border-green-900/50',
+        colorGlow: 'shadow-green-900/10',
+        link: `https://ssw.inf.br/cgi-local/tracking/${CNPJ_NICOPEL_CLEAN}/${nf}`,
+        isSSW: true,
+        logoUrl: 'https://i.ibb.co/FJCV12Y/envia-rapido.png',
+        logoBg: 'bg-white'
+      };
+    }
+    
+    // 4. BIAGHI & LUCHINI (Vip Transportes)
+    if (cleanName.includes('BIAGHI') || cleanName.includes('LUCHINI') || cleanName.includes('VIP')) {
+      return {
+        brandName: 'Vip Transportes',
+        colorClass: 'bg-purple-950/40 text-purple-400 border-brand-purple/50',
+        colorGlow: 'shadow-brand-purple/10',
+        link: `https://ssw.inf.br/cgi-local/tracking/${CNPJ_NICOPEL_CLEAN}/${nf}`,
+        isSSW: true,
+        logoUrl: 'https://i.ibb.co/hsvJymp/Vip-Logo03-1.png',
+        logoBg: 'bg-white'
+      };
+    }
+    
+    // 5. COOPEX
+    if (cleanName.includes('COOPEX')) {
+      return {
+        brandName: 'Coopex',
+        colorClass: 'bg-amber-950/40 text-amber-400 border-amber-900/50',
+        colorGlow: 'shadow-amber-900/10',
+        link: `https://ssw.inf.br/cgi-local/tracking/${CNPJ_NICOPEL_CLEAN}/${nf}`,
+        isSSW: true,
+        logoUrl: 'https://i.ibb.co/YbYTcHq/coopex.png',
+        logoBg: 'bg-sky-950/40 border border-sky-800/30'
+      };
+    }
+    
+    // 6. RODONAVES
     if (cleanName.includes('RODONAVES')) {
       return {
         brandName: 'Rodonaves',
@@ -200,12 +243,12 @@ export default function RastreioPublico() {
         colorGlow: 'shadow-blue-900/10',
         link: 'https://rodonaves.com.br/rastreio-de-mercadoria',
         isSSW: false,
-        logoBg: 'from-blue-600 to-orange-500',
-        logoLetter: 'RN'
+        logoUrl: 'https://i.ibb.co/nnvt26n/logo-header-1.png',
+        logoBg: 'bg-white'
       };
     }
     
-    // Expresso São Miguel
+    // 7. EXPRESSO SÃO MIGUEL
     if (cleanName.includes('SAO MIGUEL') || cleanName.includes('SÃO MIGUEL')) {
       return {
         brandName: 'Expresso São Miguel',
@@ -213,12 +256,12 @@ export default function RastreioPublico() {
         colorGlow: 'shadow-teal-900/10',
         link: 'https://www.expressosaomiguel.com.br/',
         isSSW: false,
-        logoBg: 'from-emerald-600 to-blue-700',
-        logoLetter: 'SM'
+        logoUrl: 'https://i.ibb.co/Rp2tpRN0/logo-expresso-sao-miguel.jpg',
+        logoBg: 'bg-white'
       };
     }
-
-    // Carvalima
+    
+    // 8. CARVALIMA
     if (cleanName.includes('CARVALIMA')) {
       return {
         brandName: 'Carvalima Transportes',
@@ -226,12 +269,12 @@ export default function RastreioPublico() {
         colorGlow: 'shadow-cyan-900/10',
         link: 'https://www.carvalima.com.br/',
         isSSW: false,
-        logoBg: 'from-cyan-500 to-blue-900',
-        logoLetter: 'CL'
+        logoUrl: 'https://i.ibb.co/kKXptK9/carvalima.png',
+        logoBg: 'bg-white'
       };
     }
-
-    // Alfa Transportes
+    
+    // 9. ALFA TRANSPORTES
     if (cleanName.includes('ALFA')) {
       return {
         brandName: 'Alfa Transportes',
@@ -239,20 +282,33 @@ export default function RastreioPublico() {
         colorGlow: 'shadow-indigo-900/10',
         link: 'https://www.alfatransportes.com.br/',
         isSSW: false,
-        logoBg: 'from-indigo-600 to-sky-400',
-        logoLetter: 'AT'
+        logoUrl: 'https://i.ibb.co/PFwh475/alfa.png',
+        logoBg: 'bg-white'
       };
     }
-
+    
+    // 10. SUDOESTE
+    if (cleanName.includes('SUDOESTE')) {
+      return {
+        brandName: 'Sudoeste Transportes',
+        colorClass: 'bg-emerald-950/40 text-emerald-400 border-emerald-900/50',
+        colorGlow: 'shadow-emerald-900/10',
+        link: 'https://sudoestetransportes.com.br/',
+        isSSW: false,
+        logoUrl: 'https://i.ibb.co/k6DW1J7S/logotipo-sudoeste-transportes.png',
+        logoBg: 'bg-white'
+      };
+    }
+    
     // Fallback padrão para qualquer outra transportadora desconhecida ou geral
     return {
       brandName: name,
       colorClass: 'bg-zinc-950/40 text-zinc-400 border-zinc-900/50',
       colorGlow: 'shadow-zinc-900/10',
-      link: 'https://ssw.inf.br/2/rastreamento', // SSW como fallback geral inteligente no Brasil
+      link: 'https://ssw.inf.br/2/rastreamento',
       isSSW: true,
-      logoBg: 'from-zinc-700 to-zinc-900',
-      logoLetter: 'TR'
+      logoUrl: null,
+      logoBg: 'bg-zinc-800'
     };
   };
 
@@ -429,8 +485,18 @@ export default function RastreioPublico() {
                       <div className="w-full md:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                         {/* Identificador da Transportadora com Mini Logo em Estilo Visual */}
                         <div className={`border rounded-xl px-3 py-2 flex items-center gap-2 ${tData.colorClass} ${tData.colorGlow}`}>
-                          <div className={`w-8 h-8 rounded-lg bg-gradient-to-tr ${tData.logoBg} flex items-center justify-center font-black text-white text-xs`}>
-                            {tData.logoLetter}
+                          <div className={`w-8 h-8 rounded-lg ${tData.logoBg} flex items-center justify-center overflow-hidden p-0.5 shadow-sm shadow-black/20`}>
+                            {tData.logoUrl ? (
+                              <img 
+                                src={tData.logoUrl} 
+                                alt={tData.brandName} 
+                                className="h-full w-full object-contain"
+                              />
+                            ) : (
+                              <span className="font-black text-white text-[10px]">
+                                {tData.brandName.substring(0, 2).toUpperCase()}
+                              </span>
+                            )}
                           </div>
                           <div className="text-left">
                             <span className="text-[9px] text-zinc-500 block font-semibold leading-tight">Transportador</span>
