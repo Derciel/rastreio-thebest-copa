@@ -233,7 +233,7 @@ export default function RastreioPublico() {
           <img 
             src="https://i.ibb.co/cccWwwq4/X-1.png" 
             alt="Logo Potes da Copa e Petit-gateau" 
-            className="h-28 md:h-36 object-contain relative rounded-xl filter drop-shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-transform duration-300 group-hover:scale-102"
+            className="h-28 md:h-36 object-contain relative rounded-xl filter brightness-0 invert drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-transform duration-300 group-hover:scale-102"
           />
         </div>
         
@@ -241,7 +241,7 @@ export default function RastreioPublico() {
           <span className="text-gradient-purple-gold">CAMPANHA DE INVERNO</span>
         </h1>
         <p className="text-sm md:text-base text-zinc-400 max-w-xl">
-          Consulte suas Notas Fiscais de **Potes da Copa** e **Embalagens Petit-gateau (Waffle)** da **The Best Açaí** e rastreie suas entregas instantaneamente.
+          Consulte suas Notas Fiscais de <strong className="font-bold text-zinc-200">Potes da Copa</strong> e <strong className="font-bold text-zinc-200">Embalagens Petit-gateau (Waffle)</strong> da <strong className="font-bold text-zinc-200">The Best Açaí</strong> e rastreie suas entregas instantaneamente.
         </p>
       </div>
 
@@ -287,7 +287,7 @@ export default function RastreioPublico() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-6 pt-6 border-t border-zinc-900/60 text-xs text-zinc-500">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-brand-gold rounded-full animate-pulse"></span>
-            <span>Remetente padrão: **Nicopel Embalagens**</span>
+            <span>Remetente padrão: <strong className="font-bold text-zinc-300">Nicopel Embalagens</strong></span>
             <button 
               onClick={handleCopyNicopelCNPJ}
               className="ml-2 px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 transition-all cursor-pointer flex items-center gap-1 active:scale-95"
@@ -412,7 +412,7 @@ export default function RastreioPublico() {
                         </div>
                         {nota.diasUteis !== null && (
                           <div className="mt-1 text-zinc-500">
-                            Prazo estimado de trânsito: **{nota.diasUteis} dias úteis**
+                            Prazo estimado de trânsito: <strong className="font-bold text-zinc-300">{nota.diasUteis} dias úteis</strong>
                           </div>
                         )}
                       </div>
@@ -448,7 +448,7 @@ export default function RastreioPublico() {
                     {/* Dica amigável do SSW se aplicável */}
                     {tData.isSSW && (
                       <div className="bg-zinc-950/60 text-zinc-500 text-[10px] rounded-lg p-2 border border-zinc-900 text-center leading-relaxed">
-                        🔍 Esta transportadora rastreia via **SSW**. Ao abrir, o rastreamento é feito de forma **automática** usando o CNPJ da Nicopel e a Nota Fiscal. Se necessário, use as opções "Destinatário" ou "Remetente".
+                        🔍 Esta transportadora rastreia via <strong className="font-bold text-zinc-300">SSW</strong>. Ao abrir, o rastreamento é feito de forma <strong className="font-bold text-zinc-300">automática</strong> usando o CNPJ da Nicopel e a Nota Fiscal. Se necessário, use as opções "Destinatário" ou "Remetente".
                       </div>
                     )}
                   </div>
@@ -463,7 +463,7 @@ export default function RastreioPublico() {
             <ul className="text-xs md:text-sm text-zinc-500 space-y-2 text-left max-w-md mx-auto">
               <li className="flex items-start gap-2">
                 <span className="text-brand-purple-light font-bold">1.</span>
-                <span>Digite o **CNPJ** da sua Franquia The Best Açaí na barra acima.</span>
+                <span>Digite o <strong className="font-bold text-zinc-300">CNPJ</strong> da sua Franquia The Best Açaí na barra acima.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-brand-purple-light font-bold">2.</span>
@@ -471,11 +471,11 @@ export default function RastreioPublico() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-brand-purple-light font-bold">3.</span>
-                <span>Ao localizar a nota, clique em **"Rastrear Pedido"** para ser direcionado ao site da transportadora.</span>
+                <span>Ao localizar a nota, clique em <strong className="font-bold text-zinc-300">"Rastrear Pedido"</strong> para ser direcionado ao site da transportadora.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-brand-purple-light font-bold">4.</span>
-                <span>O sistema fará o rastreamento automático na **SSW** ou fornecerá botões de **Cópia Rápida** dos dados para colar no site oficial da transportadora de forma ágil!</span>
+                <span>O sistema fará o rastreamento automático na <strong className="font-bold text-zinc-300">SSW</strong> ou fornecerá botões de <strong className="font-bold text-zinc-300">Cópia Rápida</strong> dos dados para colar no site oficial da transportadora de forma ágil!</span>
               </li>
             </ul>
           </div>
