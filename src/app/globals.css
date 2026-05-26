@@ -68,13 +68,11 @@ body {
 
 /* Transição de cores e gradientes animados */
 .text-gradient-purple-gold {
-  background: linear-gradient(135deg, #c084fc 0%, #fbbf24 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--brand-gold);
 }
 
 .bg-gradient-purple-gold {
-  background: linear-gradient(135deg, #5c1b9b 0%, #d97706 100%);
+  background: var(--brand-purple);
 }
 
 /* Animações e transições */
