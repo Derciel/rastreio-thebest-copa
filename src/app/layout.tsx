@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   description: "Consulte suas Notas Fiscais de Potes da Copa e Embalagens Waffle da The Best Açaí e rastreie suas entregas.",
   keywords: ["The Best Açaí", "Nicopel Embalagens", "Rastreio", "Potes da Copa", "Campanha de Inverno"],
   authors: [{ name: "The Best Açaí & Nicopel" }],
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/favicon.ico",
+    apple: "/icon.png",
+  }
 };
 
 export default function RootLayout({
