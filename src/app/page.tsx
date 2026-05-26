@@ -570,7 +570,7 @@ export default function RastreioPublico() {
 
       {/* FOOTER */}
       <footer className="w-full text-center text-[10px] md:text-xs text-zinc-600 mt-12 pt-6 border-t border-zinc-900/60">
-        <p>© 2026 The Best Açaí. Todos os direitos reservados. Nicopel Embalagens.</p>
+        <p>Todos os direitos reservados. Nicopel Embalagens e © 2026</p>
       </footer>
     </main>
   );
