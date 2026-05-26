@@ -20,17 +20,50 @@ export async function GET(req: NextRequest) {
     
     console.log(`Buscando Notas Fiscais no Neon. Termo original: "${query}", Termo higienizado: "${searchClean}", CNPJ limpo: "${cnpjClean}"`);
     
+    // Montagem dinâmica de cláusulas OR inteligentes para abranger CNPJ completo, raízes de 8 ou 7 dígitos
+    const orConditions: any[] = [
+      { nf: { contains: searchClean } },
+      { idLoja: { equals: searchClean } },
+      { cidade: { mode: 'insensitive', contains: searchClean } }
+    ];
+    
+    if (cnpjClean) {
+      // Busca exata ou contendo o CNPJ higienizado
+      orConditions.push({ cnpj: { contains: cnpjClean } });
+      orConditions.push({ cnpj: { contains: searchClean } });
+      
+      // Se for um CNPJ completo (14 dígitos)
+      if (cnpjClean.length === 14) {
+        const raiz8 = cnpjClean.substring(0, 8);
+        orConditions.push({ cnpj: { equals: raiz8 } });
+        
+        const raizSemZero = raiz8.replace(/^0+/, '');
+        if (raizSemZero !== raiz8) {
+          orConditions.push({ cnpj: { equals: raizSemZero } });
+        }
+      } 
+      // Se for uma raiz de CNPJ digitada (8 dígitos)
+      else if (cnpjClean.length === 8) {
+        orConditions.push({ cnpj: { startsWith: cnpjClean } });
+        
+        const raizSemZero = cnpjClean.replace(/^0+/, '');
+        if (raizSemZero !== cnpjClean) {
+          orConditions.push({ cnpj: { startsWith: raizSemZero } });
+          orConditions.push({ cnpj: { equals: raizSemZero } });
+        }
+      } 
+      // Se for uma raiz curta de CNPJ (7 dígitos devido à perda de zero à esquerda no Excel)
+      else if (cnpjClean.length === 7) {
+        const raiz8ComZero = '0' + cnpjClean;
+        orConditions.push({ cnpj: { startsWith: raiz8ComZero } });
+        orConditions.push({ cnpj: { equals: cnpjClean } });
+      }
+    }
+    
     // Consulta robusta no Neon PostgreSQL
-    // Busca por CNPJ (exato/parcial), Número da NF (exato/parcial), Nome da Franquia (parcial)
     const notas = await prisma.notaFiscal.findMany({
       where: {
-        OR: [
-          { cnpj: { contains: cnpjClean } },
-          { cnpj: { contains: searchClean } }, // Caso o documento internacional tenha letras
-          { nf: { contains: searchClean } },
-          { idLoja: { equals: searchClean } },
-          { cidade: { mode: 'insensitive', contains: searchClean } },
-        ]
+        OR: orConditions
       },
       orderBy: {
         dtEnvio: 'desc' // Notas mais recentes primeiro
