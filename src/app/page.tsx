@@ -313,44 +313,44 @@ export default function RastreioPublico() {
   };
 
   return (
-    <main className="min-h-screen px-4 py-8 md:py-16 max-w-4xl mx-auto flex flex-col justify-between">
+    <main className="min-h-screen px-4 py-4 md:py-6 max-w-4xl mx-auto flex flex-col justify-between">
       {/* 1. CABEÇALHO COM LOGO OFICIAL DA CAMPANHA */}
-      <div className="w-full flex flex-col items-center text-center mb-8 md:mb-12">
-        <div className="relative mb-6 group cursor-pointer">
+      <div className="w-full flex flex-col items-center text-center mb-4 md:mb-6">
+        <div className="relative mb-3 group cursor-pointer">
           <div className="absolute inset-0 bg-brand-purple/20 rounded-full blur-xl transition-all group-hover:bg-brand-purple/35 group-hover:scale-105 duration-300"></div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
             src="https://i.ibb.co/cccWwwq4/X-1.png" 
             alt="Logo Potes da Copa e Petit-gateau" 
-            className="h-28 md:h-36 object-contain relative rounded-xl filter brightness-0 invert drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-transform duration-300 group-hover:scale-102"
+            className="h-16 md:h-20 object-contain relative rounded-xl filter brightness-0 invert drop-shadow-[0_0_12px_rgba(255,255,255,0.18)] transition-transform duration-300 group-hover:scale-102"
           />
         </div>
         
-        <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight mb-3">
+        <h1 className="text-xl md:text-2xl font-extrabold tracking-tight mb-1.5">
           <span className="text-gradient-purple-gold">CAMPANHA DE INVERNO</span>
         </h1>
-        <p className="text-sm md:text-base text-zinc-400 max-w-xl">
+        <p className="text-xs md:text-sm text-zinc-400 max-w-lg">
           Consulte suas Notas Fiscais de <strong className="font-bold text-zinc-200">Potes da Copa</strong> e <strong className="font-bold text-zinc-200">Embalagens Petit-gateau (Waffle)</strong> da <strong className="font-bold text-zinc-200">The Best Açaí</strong> e rastreie suas entregas.
         </p>
       </div>
 
       {/* 2. BARRA DE CONSULTA PÚBLICA */}
-      <div className="w-full glass-panel rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden neon-glow-purple">
+      <div className="w-full glass-panel rounded-xl p-4 md:p-5 mb-4 relative overflow-hidden neon-glow-purple">
         <div className="absolute -top-12 -right-12 w-24 h-24 bg-brand-purple/10 rounded-full blur-2xl"></div>
         <div className="absolute -bottom-12 -left-12 w-24 h-24 bg-brand-gold/5 rounded-full blur-2xl"></div>
         
-        <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4 relative">
+        <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-3 relative">
           <div className="flex-1 relative">
             <input 
               type="text"
               value={query}
               onChange={handleCNPJChange}
               placeholder="Digite o CNPJ da sua Franquia..."
-              className="w-full bg-zinc-950/80 border border-zinc-800 rounded-xl px-5 py-4 pl-12 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-brand-purple/60 focus:ring-2 focus:ring-brand-purple/15 transition-all text-base md:text-lg"
+              className="w-full bg-zinc-950/80 border border-zinc-800 rounded-xl px-4 py-3 pl-10 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-brand-purple/60 focus:ring-2 focus:ring-brand-purple/15 transition-all text-sm md:text-base"
             />
             {/* Ícone Lupa/Pesquisa */}
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
@@ -358,11 +358,11 @@ export default function RastreioPublico() {
           <button 
             type="submit" 
             disabled={loading}
-            className="bg-gradient-purple-gold text-white font-bold px-8 py-4 rounded-xl hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] disabled:opacity-50 transition-all duration-300 transform active:scale-98 text-base md:text-lg cursor-pointer"
+            className="bg-gradient-purple-gold text-white font-bold px-6 py-3 rounded-xl hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] disabled:opacity-50 transition-all duration-300 transform active:scale-98 text-sm md:text-base cursor-pointer"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -373,7 +373,7 @@ export default function RastreioPublico() {
         </form>
 
         {/* Informações Auxiliares de Cópia e Dica */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-6 pt-6 border-t border-zinc-900/60 text-xs text-zinc-500">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mt-4 pt-4 border-t border-zinc-900/60 text-xs text-zinc-500">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-brand-gold rounded-full animate-pulse"></span>
             <span>Remetente padrão: <strong className="font-bold text-zinc-300">Nicopel Embalagens</strong></span>
@@ -544,32 +544,47 @@ export default function RastreioPublico() {
           )
         ) : (
           /* Estado Inicial: Mostra instruções bonitas antes da primeira busca */
-          <div className="w-full glass-panel rounded-2xl p-6 md:p-8 text-center text-zinc-400">
-            <h3 className="text-base font-bold text-zinc-300 mb-2">Instruções de Rastreamento:</h3>
-            <ul className="text-xs md:text-sm text-zinc-500 space-y-2 text-left max-w-md mx-auto">
-              <li className="flex items-start gap-2">
-                <span className="text-brand-purple-light font-bold">1.</span>
-                <span>Digite o <strong className="font-bold text-zinc-300">CNPJ</strong> da sua Franquia The Best Açaí na barra acima.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-brand-purple-light font-bold">2.</span>
-                <span>Veja a lista das Notas Fiscais dos seus potes de inverno e waffles.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-brand-purple-light font-bold">3.</span>
-                <span>Ao localizar a nota, clique em <strong className="font-bold text-zinc-300">"Rastrear Pedido"</strong> para ser direcionado ao site da transportadora.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-brand-purple-light font-bold">4.</span>
-                <span>O sistema fará o rastreamento automático na <strong className="font-bold text-zinc-300">SSW</strong> ou fornecerá botões de <strong className="font-bold text-zinc-300">Cópia Rápida</strong> dos dados para colar no site oficial da transportadora de forma ágil!</span>
-              </li>
-            </ul>
+          <div className="w-full glass-panel rounded-xl p-4 md:p-5 text-center text-zinc-400 animate-fade-in">
+            <h3 className="text-xs font-bold text-brand-gold uppercase tracking-wider mb-3">Guia de Rastreamento</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-left">
+              <div className="bg-zinc-950/40 p-3 rounded-lg border border-zinc-900/50">
+                <h4 className="text-xs font-bold text-zinc-200 flex items-center gap-1.5 mb-1">
+                  <span className="w-5 h-5 rounded-full bg-brand-purple/20 text-brand-purple-light flex items-center justify-center text-[10px] font-black shrink-0">1</span>
+                  Busca por CNPJ
+                </h4>
+                <p className="text-[11px] text-zinc-500 leading-relaxed">Digite o CNPJ da sua franquia no campo de consulta acima para listar todas as suas Notas Fiscais faturadas.</p>
+              </div>
+              
+              <div className="bg-zinc-950/40 p-3 rounded-lg border border-zinc-900/50">
+                <h4 className="text-xs font-bold text-zinc-200 flex items-center gap-1.5 mb-1">
+                  <span className="w-5 h-5 rounded-full bg-brand-purple/20 text-brand-purple-light flex items-center justify-center text-[10px] font-black shrink-0">2</span>
+                  Itens Faturados
+                </h4>
+                <p className="text-[11px] text-zinc-500 leading-relaxed">Veja as quantidades exatas de potes de inverno (240ml/500ml), bases de waffle e tampas faturados na nota.</p>
+              </div>
+              
+              <div className="bg-zinc-950/40 p-3 rounded-lg border border-zinc-900/50">
+                <h4 className="text-xs font-bold text-zinc-200 flex items-center gap-1.5 mb-1">
+                  <span className="w-5 h-5 rounded-full bg-brand-purple/20 text-brand-purple-light flex items-center justify-center text-[10px] font-black shrink-0">3</span>
+                  Rastreio Direto (SSW)
+                </h4>
+                <p className="text-[11px] text-zinc-500 leading-relaxed">Para <strong>Plav, TEX, Envia Rápido, Vip e Coopex</strong>, o botão <strong>"Rastrear Pedido"</strong> faz a consulta 100% automática, sem digitar nada!</p>
+              </div>
+              
+              <div className="bg-zinc-950/40 p-3 rounded-lg border border-zinc-900/50">
+                <h4 className="text-xs font-bold text-zinc-200 flex items-center gap-1.5 mb-1">
+                  <span className="w-5 h-5 rounded-full bg-brand-purple/20 text-brand-purple-light flex items-center justify-center text-[10px] font-black shrink-0">4</span>
+                  Rastreio Manual
+                </h4>
+                <p className="text-[11px] text-zinc-500 leading-relaxed">Para <strong>Rodonaves, São Miguel, Carvalima, Alfa e Sudoeste</strong>, use os botões rápidos de copiar CNPJ Nicopel (Remetente) e NF.</p>
+              </div>
+            </div>
           </div>
         )}
       </div>
 
       {/* FOOTER */}
-      <footer className="w-full text-center text-[10px] md:text-xs text-zinc-600 mt-12 pt-6 border-t border-zinc-900/60">
+      <footer className="w-full text-center text-[10px] md:text-xs text-zinc-600 mt-6 pt-4 border-t border-zinc-900/60">
         <p>Todos os direitos reservados. Nicopel Embalagens © 2026</p>
       </footer>
     </main>
