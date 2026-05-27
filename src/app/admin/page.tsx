@@ -17,7 +17,7 @@ export default function PainelAdmin() {
   useEffect(() => {
     async function loadStats() {
       try {
-        const res = await fetch('/api/notas');
+        const res = await fetch('/api/notas', { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (data.config) {

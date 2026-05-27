@@ -48,7 +48,7 @@ export default function RastreioPublico() {
   useEffect(() => {
     async function loadInitialData() {
       try {
-        const res = await fetch('/api/notas');
+        const res = await fetch('/api/notas', { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (data.config) setConfig(data.config);
@@ -88,7 +88,7 @@ export default function RastreioPublico() {
     setLoading(true);
     setSearched(true);
     try {
-      const res = await fetch(`/api/notas?q=${encodeURIComponent(query)}`);
+      const res = await fetch(`/api/notas?q=${encodeURIComponent(query)}`, { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
         setNotas(data.notas || []);
@@ -393,7 +393,7 @@ export default function RastreioPublico() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 15H19" />
               </svg>
-              Última atualização da planilha: <strong className="text-zinc-400">{new Date(config.ultimaSinc).toLocaleString('pt-BR')}</strong>
+              Última atualização: <strong className="text-zinc-400">{new Date(config.ultimaSinc).toLocaleString('pt-BR')}</strong>
             </div>
           )}
         </div>
@@ -570,7 +570,7 @@ export default function RastreioPublico() {
 
       {/* FOOTER */}
       <footer className="w-full text-center text-[10px] md:text-xs text-zinc-600 mt-12 pt-6 border-t border-zinc-900/60">
-        <p>Todos os direitos reservados. Nicopel Embalagens e © 2026</p>
+        <p>Todos os direitos reservados. Nicopel Embalagens © 2026</p>
       </footer>
     </main>
   );
