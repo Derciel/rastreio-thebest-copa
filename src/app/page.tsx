@@ -215,8 +215,10 @@ export default function RastreioPublico() {
         brandName: 'Vip Transportes',
         colorClass: 'bg-purple-950/40 text-purple-400 border-brand-purple/50',
         colorGlow: 'shadow-brand-purple/10',
-        link: `https://ssw.inf.br/cgi-local/tracking/${CNPJ_NICOPEL_CLEAN}/${nf}`,
-        isSSW: true,
+        link: 'tel:4333560099',
+        isSSW: false,
+        isPhoneOnly: true,
+        phoneNumber: '(43) 3356-0099',
         logoUrl: 'https://i.ibb.co/hsvJymp/Vip-Logo03-1.png',
         logoBg: 'bg-white'
       };
@@ -307,6 +309,8 @@ export default function RastreioPublico() {
       colorGlow: 'shadow-zinc-900/10',
       link: 'https://ssw.inf.br/2/rastreamento',
       isSSW: true,
+      isPhoneOnly: false,
+      phoneNumber: null as string | null,
       logoUrl: null,
       logoBg: 'bg-zinc-800'
     };
@@ -504,23 +508,45 @@ export default function RastreioPublico() {
                           </div>
                         </div>
                         
-                        {/* Botão de Ação Rápida Rastrear */}
-                        <a 
-                          href={tData.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-zinc-100 text-zinc-950 font-bold px-5 py-3 rounded-xl hover:bg-brand-gold hover:text-zinc-950 hover:shadow-[0_0_15px_rgba(251,191,36,0.35)] transition-all duration-300 flex items-center justify-center gap-2 active:scale-98 cursor-pointer"
-                        >
-                          Rastrear Pedido
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                        </a>
+                        {/* Botão de Ação Rápida Rastrear / Ligar */}
+                        {tData.isPhoneOnly ? (
+                          <a 
+                            href={tData.link}
+                            className="bg-brand-purple text-white font-bold px-5 py-3 rounded-xl hover:bg-brand-purple-light hover:shadow-[0_0_15px_rgba(139,92,246,0.35)] transition-all duration-300 flex items-center justify-center gap-2 active:scale-98 cursor-pointer animate-pulse-subtle"
+                          >
+                            Ligar: {tData.phoneNumber}
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h2.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.252.934L7.22 8.13a10.94 10.94 0 005.15 5.15l1.025-1.073a1 1 0 01.934-.252l2.2.547a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                          </a>
+                        ) : (
+                          <a 
+                            href={tData.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-zinc-100 text-zinc-950 font-bold px-5 py-3 rounded-xl hover:bg-brand-gold hover:text-zinc-950 hover:shadow-[0_0_15px_rgba(251,191,36,0.35)] transition-all duration-300 flex items-center justify-center gap-2 active:scale-98 cursor-pointer"
+                          >
+                            Rastrear Pedido
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </a>
+                        )}
                       </div>
                     </div>
 
-                    {/* Dica amigável e Passo a Passo para outras transportadoras não-SSW */}
-                    {!tData.isSSW ? (
+                    {/* Dicas e Instruções Adicionais baseadas no tipo de transporte */}
+                    {tData.isPhoneOnly ? (
+                      <div className="bg-zinc-950/60 text-zinc-400 text-xs rounded-xl p-4 border border-zinc-900 leading-relaxed mt-2 flex flex-col gap-2">
+                        <span className="text-[10px] text-brand-purple-light font-bold uppercase tracking-wider block">📞 Rastreamento via Contato Telefônico</span>
+                        <p>Esta transportadora realiza o rastreio e agendamento de entregas estritamente via atendimento telefônico:</p>
+                        <ol className="list-decimal pl-4 space-y-1.5 text-zinc-500">
+                          <li>Clique no botão <strong className="text-zinc-300">"Ligar: {tData.phoneNumber}"</strong> acima (ou ligue diretamente para o número) para entrar em contato com o suporte da <strong>{tData.brandName}</strong>.</li>
+                          <li>Clique no ícone de prancheta ao lado do número da nota para <strong className="text-zinc-300">copiar o número da Nota Fiscal (NF {nota.nf})</strong>.</li>
+                          <li>Informe o número da Nota Fiscal e o nome da sua Franquia para obter a posição exata da sua entrega e o status do trânsito.</li>
+                        </ol>
+                      </div>
+                    ) : !tData.isSSW ? (
                       <div className="bg-zinc-950/60 text-zinc-400 text-xs rounded-xl p-4 border border-zinc-900 leading-relaxed mt-2 flex flex-col gap-2">
                         <span className="text-[10px] text-brand-gold font-bold uppercase tracking-wider block">⚠️ Rastreamento Manual - Passo a Passo</span>
                         <p>Como esta transportadora não permite link direto, siga os passos rápidos para rastrear:</p>

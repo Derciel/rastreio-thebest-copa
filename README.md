@@ -21,11 +21,11 @@ O objetivo do sistema é permitir que os franqueados da **The Best Açaí** real
 *   **Busca Sem Fricção**: Interface Dark Mode com efeito Glassmorphism, brilho roxo neon e máscara de formatação automática para CNPJ brasileiro.
 *   **Detalhamento de Campanha**: Cada nota fiscal localizada detalha as quantidades exatas dos itens de inverno enviados: `Pote 240ml`, `Pote 500ml`, `Base Waffle` e `Tampas`.
 *   **Cópia Rápida em 1-Clique**: Atalhos dedicados para copiar a Nota Fiscal e o CNPJ da **Nicopel Embalagens** (Remetente: `10815855000124`) instantaneamente.
-*   **Integração de 10 Transportadoras & Motor SSW Inteligente**:
-    *   **SSW Unificado**: Para as 5 transportadoras que utilizam a SSW (**Plav Transportadora**, **TEX**, **Envia Rápido**, **Biaghi & Luchini** e **Coopex**), a aplicação gera um link de redirecionamento inteligente:
+*   **Integração de 10 Transportadoras & Motor de Rastreio Inteligente**:
+    *   **SSW Unificado**: Para as 4 transportadoras que utilizam a SSW (**Plav Transportadora**, **TEX**, **Envia Rápido** e **Coopex**), a aplicação gera um link de redirecionamento inteligente:
         `https://ssw.inf.br/cgi-local/tracking/10815855000124/[NF]`
         Ao clicar, o franqueado abre a página da SSW **com os dados de rastreamento (CNPJ do Remetente e Nota Fiscal) já preenchidos e a consulta carregada na tela**, sem digitar nada!
-    *   **Canais Próprios**: Para as demais transportadoras (**Rodonaves**, **Expresso São Miguel**, **Carvalima**, **Alfa Transportes** e **Sudoeste Transportes**), os botões apontam para os portais oficiais com instruções claras de cópia e colagem.
+    *   **Canais Próprios / Telefônicos**: Para as demais transportadoras (**Rodonaves**, **Expresso São Miguel**, **Carvalima**, **Alfa Transportes**, **Sudoeste Transportes** e **Vip Transportes**), a aplicação fornece direcionamento aos portais oficiais com orientações de cópia e colagem ou, no caso da **Vip**, atalho de ligação rápida direta para o telefone de suporte `(43) 3356-0099`.
 *   **Painel Administrativo (`/admin`)**: Rota privada que exibe o número total de notas fiscais indexadas no Neon PostgreSQL, a data da última importação e o botão para forçar a sincronização instantânea do SharePoint (protegido por `ADMIN_TOKEN`).
 
 ---
