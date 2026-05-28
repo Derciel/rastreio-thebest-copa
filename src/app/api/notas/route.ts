@@ -1,11 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { normalizeCNPJ } from '@/lib/excelParser';
+import { normalizeCNPJ, syncSharePointData } from '@/lib/excelParser';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
   try {
+    // 1. Verifica se precisa de sincronização automática (Lazy Sync - 5 minutos)
+    const CINCO_MINUTOS_MS = 5 * 60 * 1000;
+    const agora = new Date();
+    
+    const configGlobal = await prisma.configuracao.findFirst({
+      where: { id: 'config_global' }
+    });
+    
+    let precisaSinc = false;
+    if (!configGlobal || !configGlobal.ultimaSinc) {
+      precisaSinc = true;
+    } else {
+      const diffMs = agora.getTime() - new Date(configGlobal.ultimaSinc).getTime();
+      if (diffMs >= CINCO_MINUTOS_MS) {
+        precisaSinc = true;
+      }
+    }
+    
+    if (precisaSinc) {
+      console.log('🔄 [LAZY-SYNC] Última sincronização foi há mais de 5 minutos (ou não existe). Disparando sincronização reativa...');
+      const syncResult = await syncSharePointData();
+      if (syncResult.success) {
+        console.log(`✅ [LAZY-SYNC] Sincronização automática reativa concluída: ${syncResult.count} registros.`);
+      } else {
+        console.error('❌ [LAZY-SYNC] Falha na sincronização automática reativa:', syncResult.error);
+      }
+    }
+
     const { searchParams } = new URL(req.url);
     const query = searchParams.get('q') || '';
     
