@@ -280,8 +280,8 @@ export default function RastreioPublico() {
         brandName: 'Alfa Transportes',
         colorClass: 'bg-indigo-950/40 text-indigo-400 border-indigo-900/50',
         colorGlow: 'shadow-indigo-900/10',
-        link: `https://ssw.inf.br/cgi-local/tracking/${CNPJ_NICOPEL_CLEAN}/${nf}`,
-        isSSW: true,
+        link: 'https://alfatransportes.com.br/',
+        isSSW: false,
         logoUrl: 'https://i.ibb.co/PFwh475/alfa.png',
         logoBg: 'bg-white'
       };
@@ -568,7 +568,7 @@ export default function RastreioPublico() {
                   <span className="w-5 h-5 rounded-full bg-brand-purple/20 text-brand-purple-light flex items-center justify-center text-[10px] font-black shrink-0">3</span>
                   Rastreio Direto (SSW)
                 </h4>
-                <p className="text-[11px] text-zinc-500 leading-relaxed">Para <strong>Plav, TEX, Envia Rápido, Vip, Coopex e Alfa</strong>, o botão <strong>"Rastrear Pedido"</strong> faz a consulta 100% automática, sem digitar nada!</p>
+                <p className="text-[11px] text-zinc-500 leading-relaxed">Para <strong>Plav, TEX, Envia Rápido, Vip e Coopex</strong>, o botão <strong>"Rastrear Pedido"</strong> faz a consulta 100% automática, sem digitar nada!</p>
               </div>
               
               <div className="bg-zinc-950/40 p-3 rounded-lg border border-zinc-900/50">
@@ -576,7 +576,7 @@ export default function RastreioPublico() {
                   <span className="w-5 h-5 rounded-full bg-brand-purple/20 text-brand-purple-light flex items-center justify-center text-[10px] font-black shrink-0">4</span>
                   Rastreio Manual
                 </h4>
-                <p className="text-[11px] text-zinc-500 leading-relaxed">Para <strong>Rodonaves, São Miguel, Carvalima e Sudoeste</strong>, use os botões rápidos de copiar CNPJ Nicopel (Remetente) e NF.</p>
+                <p className="text-[11px] text-zinc-500 leading-relaxed">Para <strong>Rodonaves, São Miguel, Carvalima, Alfa e Sudoeste</strong>, use os botões rápidos de copiar CNPJ Nicopel (Remetente) e NF.</p>
               </div>
             </div>
           </div>
